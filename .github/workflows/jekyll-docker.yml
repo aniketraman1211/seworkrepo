@@ -3,7 +3,11 @@ name: Deploy Calculator to GitHub Pages
 on:
   push:
     branches:
+<<<<<<< HEAD
       - main  # Change this if your default is something else
+=======
+      - main  # Change this if your default branch is something else
+>>>>>>> 8fa01775918bba33413451595bcd88c03e2179e1
 
 permissions:
   contents: read
