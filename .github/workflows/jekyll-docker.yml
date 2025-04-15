@@ -3,7 +3,12 @@ name: Deploy Calculator to GitHub Pages
 on:
   push:
     branches:
-      - main  # or use 'master' if that's your default branch
+      - main  # Change this if your default branch is something else
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
@@ -13,8 +18,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # or ./dist if your site is in a dist folder
+          path: .  # Current directory contains your index.html, style.css, etc.
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
